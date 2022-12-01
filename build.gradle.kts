@@ -18,10 +18,18 @@ plugins {
   application
   id("com.github.johnrengelman.shadow") version "7.1.2"
   id("org.sonarqube") version "3.4.0.2513"
+  id("org.checkerframework") version "0.6.16"
 }
+
+apply(plugin = "org.checkerframework")
 
 repositories {
   mavenCentral()
+  mavenLocal()
+}
+
+checkerFramework {
+    checkers.add("edu.ucr.cs.riple.taint.ucrtainting.UCRTaintingChecker")
 }
 
 application {
@@ -53,6 +61,8 @@ dependencies {
   testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
   testImplementation("org.mockito:mockito-inline:4.7.0")
   testImplementation("org.mockito:mockito-junit-jupiter:4.7.0")
+  annotationProcessor("edu.ucr.cs.riple.taint:ucrtainting-checker:0.1")
+  implementation("edu.ucr.cs.riple.taint:ucrtainting-checker:0.1")
 }
 
 /**
@@ -74,8 +84,8 @@ val TARGET_FILE_PATH_BASE_SHORT = "targetFilePathBaseShort"
 val UPPERCASE_PROJECT_NAME = "uppercaseProjectName"
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_16
-  targetCompatibility = JavaVersion.VERSION_16
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
 }
 
 /**
@@ -658,7 +668,7 @@ tasks.register("jpackage") {
   }
 }
 
-val compilerOptions = listOf("-Xlint:deprecation", "-Xlint:unchecked")
+val compilerOptions = listOf("-Xlint:deprecation", "-Xlint:unchecked", "-Awarns")
 
 tasks {
   compileJava {
