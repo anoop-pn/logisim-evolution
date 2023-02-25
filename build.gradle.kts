@@ -668,7 +668,7 @@ tasks.register("jpackage") {
   }
 }
 
-val compilerOptions = listOf("-Xlint:deprecation", "-Xlint:unchecked", "-Awarns")
+val compilerOptions = listOf("-Xlint:deprecation", "-Xlint:unchecked", "-Awarns", "-AannotatedPackages=com.test", "-AenableCustomCheck=true")
 
 tasks {
   compileJava {
