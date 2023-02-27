@@ -18,7 +18,7 @@ plugins {
   application
   id("com.github.johnrengelman.shadow") version "7.1.2"
   id("org.sonarqube") version "3.4.0.2513"
-  id("org.checkerframework") version "0.6.16"
+  id("org.checkerframework") version "0.6.24"
 }
 
 apply(plugin = "org.checkerframework")
